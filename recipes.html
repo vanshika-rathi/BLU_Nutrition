@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recipes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+  <h2>BLU</h2>
+  <nav>
+    <a href="index.html">Search</a>
+    <a href="swaps.html">Swaps</a>
+    <a href="recipes.html">Recipes</a>
+  </nav>
+</header>
+
+<div class="container">
+
+<h3>Recipes</h3>
+
+<div class="button-row" id="cuisineRow">
+  <button onclick="handleCuisineClick(event,'chinese')">Chinese</button>
+  <button onclick="handleCuisineClick(event,'italian')">Italian</button>
+  <button onclick="handleCuisineClick(event,'mexican')">Mexican</button>
+  <button onclick="handleCuisineClick(event,'thai')">Thai</button>
+  <button onclick="handleCuisineClick(event,'indian')">Indian</button>
+  <button onclick="handleCuisineClick(event,'japanese')">Japanese</button>
+  <button onclick="handleCuisineClick(event,'american')">American</button>
+</div>
+
+<div id="recipeItems" class="button-row"></div>
+<div id="recipeCard"></div>
+
+</div>
+
+<!-- 🔥 ORDER MATTERS -->
+<script src="recipesData.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

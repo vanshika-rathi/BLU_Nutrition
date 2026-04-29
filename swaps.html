@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Swaps</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+  <h2>BLU</h2>
+  <nav>
+    <a href="index.html">Search</a>
+    <a href="swaps.html">Swaps</a>
+    <a href="recipes.html">Recipes</a>
+  </nav>
+</header>
+
+<div class="container">
+
+<h3>Popular Swaps</h3>
+
+<div class="button-row" id="categoryRow">
+  <button onclick="handleCategoryClick(event,'sweeteners')">Sweeteners</button>
+  <button onclick="handleCategoryClick(event,'drinks')">Drinks</button>
+  <button onclick="handleCategoryClick(event,'snacks')">Snacks</button>
+  <button onclick="handleCategoryClick(event,'dairy')">Dairy</button>
+  <button onclick="handleCategoryClick(event,'pantry')">Pantry</button>
+  <button onclick="handleCategoryClick(event,'condiments')">Condiments</button>
+</div>
+
+<div id="itemButtons" class="button-row"></div>
+<div id="swapResults" class="button-row"></div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

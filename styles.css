@@ -1,0 +1,107 @@
+:root {
+  --bg: #f7faff;
+  --card: #ffffff;
+  --text: #111;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --border: #dbeafe;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, Inter, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav a {
+  margin-left: 18px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.container {
+  max-width: 720px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+}
+
+button.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* item buttons */
+.item-btn {
+  background: #eef6ff;
+  border-radius: 12px;
+  color: #1e3a8a;
+}
+
+.item-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* swap chips */
+.swap-chip {
+  background: #dbeafe;
+  color: #1e3a8a;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+/* recipe buttons */
+.recipe-btn {
+  background: #eef6ff;
+  border-radius: 14px;
+  color: #1e3a8a;
+}
+
+.recipe-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* recipe card */
+.recipe {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-weight: 600;
+  margin-top: 10px;
+}
