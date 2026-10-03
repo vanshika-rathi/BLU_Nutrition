@@ -19,9 +19,9 @@ app.post("/api/chat", async (req, res) => {
         Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: groqMessages,
-        max_tokens: 1000,
+       model: "openai/gpt-oss-120b",
+       messages: groqMessages,
+       max_tokens: 2000,
       }),
     });
 
