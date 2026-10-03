@@ -3,814 +3,795 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thrive Years · ThriveWell</title>
+<title>BLU by ThriveWell</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f4f6f7;--white:#fff;--teal:#2ab5a5;--teal-light:#e8f7f5;
-  --teal-mid:#c5ebe7;--navy:#1a2e3a;--muted:#8a9baa;--border:#e2e8ed;
+  --bg:#f4f6f7;
+  --white:#ffffff;
+  --teal:#2ab5a5;
+  --teal-light:#e8f7f5;
+  --teal-mid:#c5ebe7;
+  --navy:#1a2e3a;
+  --text:#1a2e3a;
+  --muted:#8a9baa;
+  --border:#e2e8ed;
+  --sidebar-w:220px;
+  --header-h:64px;
 }
-html,body{min-height:100%;font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--navy)}
-header{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;background:var(--white);border-bottom:1px solid var(--border)}
+html,body{height:100%;font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.app{display:grid;grid-template-columns:var(--sidebar-w) 1fr;grid-template-rows:var(--header-h) 1fr;height:100vh;overflow:hidden}
+header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:var(--white);border-bottom:1px solid var(--border);z-index:10}
 .logo-row{display:flex;align-items:center;gap:12px}
-.logo-badge{width:38px;height:38px;background:var(--teal);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;letter-spacing:.05em}
-.logo-name{font-size:16px;font-weight:400}
+.logo-badge{width:38px;height:38px;background:var(--teal);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;letter-spacing:.05em;flex-shrink:0}
+.logo-name{font-size:16px;color:var(--navy);font-weight:400}
 .logo-name span{color:var(--teal);font-weight:600}
+.header-right{display:flex;align-items:center;gap:20px}
+.hdr-date{font-size:13px;color:var(--muted)}
 .hdr-tag{font-size:12px;font-weight:500;color:var(--teal);background:var(--teal-light);border:1px solid var(--teal-mid);padding:4px 12px;border-radius:20px}
-.tab-btn{background:none;border:1px solid var(--border);border-radius:10px;padding:7px 16px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;transition:all .15s}
-.tab-btn:hover{border-color:var(--teal);color:var(--navy)}
-.tab-btn.active{background:var(--teal);border-color:var(--teal);color:#fff}
-.page{max-width:960px;margin:0 auto;padding:36px 32px 60px}
-
-/* PROGRESS */
-.prog-wrap{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:20px 24px;margin-bottom:28px}
-.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.prog-lbl{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
-.dot-pulse{width:7px;height:7px;border-radius:50%;background:var(--teal);display:inline-block}
-.prog-pct{font-size:13px;font-weight:700;color:var(--teal)}
-.prog-track{height:10px;background:var(--teal-light);border-radius:99px;overflow:hidden;margin-bottom:10px}
-.prog-fill{height:100%;width:0%;background:linear-gradient(90deg,#1a9e90,var(--teal),#4fd1c4);border-radius:99px;transition:width 1.1s cubic-bezier(.4,0,.2,1)}
-.milestones{display:flex;justify-content:space-between;position:relative;padding:0 2px}
-.milestones::before{content:'';position:absolute;top:6px;left:2px;right:2px;height:1px;background:var(--border)}
-.tpm{display:flex;flex-direction:column;align-items:center;gap:4px;z-index:1}
-.tpm-dot{width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--border);transition:all .5s}
-.tpm-dot.reached{background:var(--teal);border-color:var(--teal)}
-.tpm-lbl{font-size:9px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
-.prog-msg{font-size:12px;color:var(--muted);font-style:italic;margin-top:10px;text-align:center}
-
-/* INTRO */
-.thrive-intro{margin-bottom:24px}
-.thrive-intro h1{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;line-height:1.2;margin-bottom:6px}
-.thrive-intro h1 em{font-style:italic;color:var(--teal)}
+aside{background:var(--white);border-right:1px solid var(--border);padding:24px 16px;display:flex;flex-direction:column;gap:4px;overflow-y:auto}
+.aside-section{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:4px 12px 8px;margin-top:8px}
+.nb{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:none;border:none;color:var(--muted);font-family:inherit;font-size:13.5px;font-weight:500;cursor:pointer;transition:background .15s,color .15s;text-align:left;width:100%}
+.nb .ni{font-size:18px;line-height:1;flex-shrink:0}
+.nb:hover{background:var(--bg);color:var(--navy)}
+.nb.active{background:var(--teal-light);color:#0f3460;font-weight:600}
+.aside-divider{height:1px;background:var(--border);margin:8px 4px}
+.side-hero{margin-top:auto;background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:14px;padding:16px;text-align:center}
+.side-hero h4{font-family:'Playfair Display',serif;font-size:15px;color:var(--navy);margin-bottom:6px}
+.side-hero p{font-size:11px;color:var(--muted);line-height:1.6}
+main{overflow-y:auto;background:var(--bg)}
+.tc-page{display:none;padding:28px 32px;max-width:960px}
+.tc-page.active{display:block}
+.splash-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px;align-items:start}
+.splash-hero h1{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;line-height:1.2;color:var(--navy);margin-bottom:8px}
+.splash-hero h1 em{font-style:italic;color:var(--teal)}
+.splash-hero p{font-size:13px;color:var(--muted)}
+.vc{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:16px 18px;cursor:pointer;transition:border-color .15s}
+.vc:hover{border-color:var(--teal-mid)}
+.vc-label{font-size:10px;font-weight:600;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.vc-label span{display:inline-block;width:14px;height:1.5px;background:var(--teal)}
+.vc-placeholder{font-size:13px;color:#bcc8d0;font-style:italic;font-family:'Playfair Display',serif}
+.vc-text{font-size:13px;color:var(--navy);font-family:'Playfair Display',serif;font-style:italic;min-height:20px}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.sec-hd h2{font-size:20px;font-weight:700;color:var(--navy)}
+.coach-layout{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
+.blu-intro{background:var(--teal-light);border-radius:14px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.blu-avatar{width:44px;height:44px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;flex-shrink:0}
+.blu-intro-text .label{font-size:10px;font-weight:700;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.blu-intro-text .tagline{font-size:14px;color:var(--navy);font-style:italic;font-family:'Playfair Display',serif}
+.coach-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.cchip{font-size:12px;color:var(--teal);background:var(--white);border:1px solid var(--teal);padding:7px 16px;border-radius:24px;cursor:pointer;font-family:inherit;transition:background .15s}
+.cchip:hover{background:var(--teal-light)}
+.chat-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px}
+.chat-card .card-label{font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.msgs{min-height:200px;max-height:380px;overflow-y:auto;margin-bottom:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.msg-bot{background:var(--teal-light);border-radius:12px 12px 12px 3px;padding:13px 16px;font-size:13.5px;line-height:1.65;color:var(--navy);max-width:85%}
+.msg-user{background:var(--navy);border-radius:12px 12px 3px 12px;padding:13px 16px;font-size:13.5px;line-height:1.65;color:#fff;max-width:85%;align-self:flex-end}
+.msg-typing{background:var(--teal-light);border-radius:12px 12px 12px 3px;padding:13px 16px;max-width:85%;display:flex;gap:5px;align-items:center}
+.dot{width:7px;height:7px;background:var(--teal);border-radius:50%;animation:bounce 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+.inp-row{display:flex;gap:8px}
+.chat-inp{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--text);font-family:inherit;outline:none;transition:border-color .15s}
+.chat-inp:focus{border-color:var(--teal)}
+.send-btn{padding:12px 22px;background:var(--teal);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:opacity .15s}
+.send-btn:disabled{opacity:.5;cursor:default}
+.coach-side-panel{display:flex;flex-direction:column;gap:12px}
+.panel-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:16px}
+.panel-card h4{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:10px}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.stat-row:last-child{border-bottom:none}
+.stat-lbl{color:var(--muted)}
+.stat-val{font-weight:600;color:var(--teal)}
+.guidelines-layout{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g-item{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.g-hdr{display:flex;align-items:center;padding:16px;gap:12px;cursor:pointer;background:var(--white);border:none;width:100%;text-align:left;font-family:inherit;min-height:64px}
+.g-icon{font-size:24px;flex-shrink:0}
+.g-meta{flex:1}
+.g-meta h3{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:2px}
+.g-meta p{font-size:12px;color:var(--teal);font-weight:500}
+.g-arr{font-size:13px;color:var(--muted);transition:transform .2s}
+.g-item.open .g-arr{transform:rotate(180deg)}
+.g-body{display:none;padding:0 16px 16px;font-size:13px;color:#5a7080;line-height:1.7;border-top:1px solid var(--border)}
+.g-item.open .g-body{display:block}
+.g-tip{margin-top:12px;padding:10px 14px;background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;font-size:12px;color:var(--navy)}
+.recipes-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.ai-box{background:var(--teal-light);border-radius:14px;padding:18px}
+.ai-box h3{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:12px}
+.mtype{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.mt{font-size:12px;padding:7px 14px;background:var(--white);border:1px solid var(--border);border-radius:20px;color:var(--muted);cursor:pointer;font-family:inherit;transition:all .15s}
+.mt.sel{background:var(--teal);border-color:var(--teal);color:#fff}
+.gen-btn{width:100%;padding:12px;background:var(--teal);border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.gen-btn:disabled{opacity:.5;cursor:default}
+.rcard{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px}
+.rcard-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}
+.rcard h3{font-size:14px;font-weight:600;color:var(--navy)}
+.fbadge{font-size:10px;font-weight:600;color:var(--teal);background:var(--teal-light);border:1px solid var(--teal-mid);padding:3px 10px;border-radius:14px;white-space:nowrap}
+.rcard p{font-size:12.5px;color:var(--muted);line-height:1.55}
+.rtags{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap}
+.rtag{font-size:10px;color:var(--muted);background:var(--bg);padding:3px 8px;border-radius:6px;border:1px solid var(--border)}
+.ai-result{background:var(--white);border:1px solid var(--teal-mid);border-radius:12px;padding:18px 20px;margin-top:14px;font-size:13px;color:var(--navy);line-height:1.8;display:none}
+.ai-result.show{display:block}
+.ai-result strong{color:var(--teal);font-weight:600;display:block;margin-top:14px;margin-bottom:5px;font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+.ai-result strong:first-child{margin-top:0}
+.ai-result ul,.ai-result ol{margin:4px 0 10px 18px;display:flex;flex-direction:column;gap:5px}
+.ai-result ul{list-style:disc}
+.ai-result ol{list-style:decimal}
+.ai-result li{color:#4a6070;font-size:13px;line-height:1.6}
+.wcard{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px}
+.wcard-lbl{font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.wcard-lbl span{display:inline-block;width:14px;height:1.5px;background:var(--teal)}
+.history-layout{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start}
+.thrive-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.thrive-intro{margin-bottom:20px}
+.thrive-intro h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:8px}
+.thrive-intro h2 em{font-style:italic;color:var(--teal)}
 .thrive-intro p{font-size:13px;color:var(--muted);line-height:1.65}
-
-/* LAYOUT */
-.layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px}
-.card-lbl{font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:6px}
-.card-lbl span{display:inline-block;width:14px;height:1.5px;background:var(--teal)}
-.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.body-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
 .flbl{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
-.inp{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:11px 13px;font-size:13px;color:var(--navy);font-family:inherit;width:100%;outline:none;transition:border-color .15s}
-.inp:focus{border-color:var(--teal)}
-.inp.after{border-color:var(--teal-mid);background:var(--teal-light);color:var(--teal)}
-.inp.after:focus{border-color:var(--teal)}
-.div{height:1px;background:var(--border);margin:14px 0}
+.finput{background:var(--bg);border:1px solid var(--border);border-radius:11px;padding:12px 14px;font-size:14px;color:var(--navy);font-family:inherit;width:100%;outline:none;transition:border-color .15s}
+.finput:focus{border-color:var(--teal)}
+.finput.after{border-color:var(--teal-mid);background:var(--teal-light);color:var(--teal)}
+.finput.after:focus{border-color:var(--teal)}
+.divider{height:1px;background:var(--border);margin:14px 0}
 .ba-hdrs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .ba-h{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:7px;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:6px}
 .ba-h.bef{color:var(--muted);background:var(--bg);border:1px solid var(--border)}
 .ba-h.aft{color:var(--teal);background:var(--teal-light);border:1px solid var(--teal-mid)}
-.dot-grey{width:7px;height:7px;border-radius:50%;background:var(--muted)}
-.dot-teal{width:7px;height:7px;border-radius:50%;background:var(--teal)}
-.mrow{margin-bottom:12px}
-.mlbl{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.bagrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ba-dot-grey{width:7px;height:7px;border-radius:50%;background:var(--muted)}
+.ba-dot-teal{width:7px;height:7px;border-radius:50%;background:var(--teal)}
+.mrow{margin-bottom:14px}
+.mlbl{font-size:11px;font-weight:600;color:var(--navy);letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .calc-btn{width:100%;padding:14px;background:var(--teal);color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;margin-top:6px;transition:opacity .15s}
-.calc-btn:hover{opacity:.88}
-
-/* HERO */
-.hero{background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:16px;padding:24px 20px;text-align:center;margin-bottom:10px}
-.hero-eye{font-size:10px;font-weight:600;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
-.hero-num{font-family:'Playfair Display',serif;font-size:64px;font-weight:700;color:var(--teal);line-height:1}
-.hero-unit{font-size:18px;font-weight:500;color:var(--teal);opacity:.7;margin-left:4px}
-.hero-sub{margin-top:8px;font-size:12px;color:#5a8090}
-
-/* RISK TILES */
+.thrive-hero{background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:16px;padding:28px 20px;text-align:center;margin-bottom:14px}
+.th-eyebrow{font-size:10px;font-weight:600;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.th-num{font-family:'Playfair Display',serif;font-size:72px;font-weight:700;color:var(--teal);line-height:1}
+.th-unit{font-size:20px;font-weight:500;color:var(--teal);margin-left:4px;opacity:.7}
+.th-sub{margin-top:10px;font-size:12px;color:#5a8090}
 .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.tile{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
-.tile .val{font-size:20px;font-weight:700;color:var(--teal);margin-bottom:4px}
-.tile .val.nv{color:var(--navy)}
-.tile .lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;line-height:1.4}
-.tile.full{grid-column:1/-1}
-.bann{text-align:center;padding:12px 14px;border-radius:10px;font-size:12px;font-weight:500;line-height:1.5;background:var(--teal-light);border:1px solid var(--teal-mid);color:var(--teal)}
-
-/* TOOLTIP */
-.tip-wrap{position:relative;display:inline-block}
-.info-btn{background:none;border:1px solid var(--teal-mid);cursor:pointer;font-size:13px;font-weight:700;color:var(--teal);opacity:.7;padding:1px 6px;margin-top:3px;font-family:inherit;border-radius:50%;line-height:1.4;transition:opacity .15s,background .15s}
-.info-btn:hover{opacity:1;background:var(--teal-light)}
-.tooltip{visibility:hidden;opacity:0;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:12px;line-height:1.55;padding:10px 13px;border-radius:10px;width:220px;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:opacity .2s,visibility .2s;pointer-events:none}
-.tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--navy)}
-.tooltip strong{display:block;color:var(--teal);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
-.tip-wrap:hover .tooltip{visibility:visible;opacity:1}
-
-/* PERSONALIZATION */
-.personal{background:linear-gradient(135deg,#1a2e3a 0%,#1e3a4a 100%);border-radius:16px;padding:22px 24px;margin-bottom:10px;display:none}
-.personal.show{display:block}
-.per-eye{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-.per-msg{font-family:'Playfair Display',serif;font-size:17px;color:#fff;line-height:1.6;font-style:italic}
-.per-msg strong{color:var(--teal);font-style:normal}
-.per-contrib{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:rgba(255,255,255,.55)}
-.per-contrib span{color:var(--teal);font-weight:600}
-
-/* OPPORTUNITY */
-.opp-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px;display:none}
-.opp-card.show{display:block}
-.opp-sublbl{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;margin-top:14px}
-.opp-sublbl:first-of-type{margin-top:0}
-.bullet-list{display:flex;flex-direction:column;gap:6px}
-.bitem{display:flex;align-items:flex-start;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:9px 12px}
-.bdot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:6px}
-.btxt{font-size:13px;color:var(--navy);line-height:1.5;flex:1;outline:none;border:none;background:transparent;font-family:'DM Sans',sans-serif;resize:none;overflow:hidden}
-.add-btn{display:flex;align-items:center;gap:5px;margin-top:6px;font-size:12px;color:var(--teal);cursor:pointer;background:none;border:none;font-family:inherit;padding:3px 0}
-.add-btn:hover{opacity:.7}
-
-/* PRINT BTN */
-.print-btn{width:100%;padding:13px;background:var(--white);color:var(--teal);border:1.5px solid var(--teal);border-radius:12px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;display:none;align-items:center;justify-content:center;gap:8px;transition:background .15s}
-.print-btn:hover{background:var(--teal-light)}
-.print-btn.show{display:flex}
-
-
+.mtile{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.mtile .val{font-size:22px;font-weight:700;color:var(--teal);margin-bottom:4px}
+.mtile .val.navy{color:var(--navy)}
+.mtile .lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;line-height:1.4}
+.mtile.full{grid-column:1/-1}
+.bann{text-align:center;padding:13px 16px;border-radius:11px;font-size:12px;font-weight:500;line-height:1.5;background:var(--teal-light);border:1px solid var(--teal-mid);color:var(--teal)}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.modal-overlay{position:fixed;inset:0;background:rgba(26,46,58,.5);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.show{opacity:1;pointer-events:all}
+.modal{background:var(--white);border-radius:18px;padding:28px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.modal h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--navy);margin-bottom:10px}
+.modal p{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.modal textarea{width:100%;border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--navy);resize:none;outline:none;height:90px;transition:border-color .15s}
+.modal textarea:focus{border-color:var(--teal)}
+.modal-btns{display:flex;gap:10px;margin-top:14px;justify-content:flex-end}
+.modal-cancel{padding:9px 18px;background:var(--bg);border:1px solid var(--border);border-radius:9px;font-family:inherit;font-size:13px;cursor:pointer;color:var(--muted)}
+.modal-save{padding:9px 18px;background:var(--teal);border:none;border-radius:9px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;color:#fff}
 .toast{position:fixed;bottom:28px;right:28px;background:var(--navy);color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;z-index:200;transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none}
 .toast.show{transform:translateY(0);opacity:1}
+.info-btn{background:none;border:none;cursor:pointer;font-size:11px;color:var(--teal);opacity:.6;padding:2px 4px;margin-top:4px;font-family:inherit;transition:opacity .15s}
+.info-btn:hover{opacity:1}
 
-/* ── PRINT ── */
-@media print{
-  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  body,html{background:#fff!important}
-  header,.prog-wrap,.thrive-intro,.layout>.card:first-child,
-  .calc-btn,.print-btn,.toast,.info-popup,.info-btn,
-  .add-btn,.opp-card .opp-sublbl+.add-btn{display:none!important}
-  .page{padding:0!important;max-width:100%!important}
-  .layout{display:block!important}
-  .personal{display:block!important}
-  .opp-card{display:block!important}
-  .card,.personal,.opp-card,.hero{page-break-inside:avoid;margin-bottom:14px!important}
-  .bitem{background:#f4f6f7!important;border:1px solid #e2e8ed!important}
-  .btxt{font-size:12px!important}
-  .print-header{display:block!important}
+/* ── BOTTOM NAV (mobile only) ── */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--white);border-top:1px solid var(--border);padding:8px 0 env(safe-area-inset-bottom,8px)}
+.bottom-nav-inner{display:flex;justify-content:space-around;align-items:center}
+.bnav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:6px 10px;font-family:inherit;color:var(--muted);transition:color .15s;min-width:52px}
+.bnav-btn .bni{font-size:20px;line-height:1}
+.bnav-btn .bnlbl{font-size:9px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.bnav-btn.active{color:var(--teal)}
+
+/* ── MOBILE LAYOUT ── */
+@media(max-width:700px){
+  .app{grid-template-columns:1fr;grid-template-rows:var(--header-h) 1fr}
+  aside{display:none}
+  .bottom-nav{display:block}
+  main{padding-bottom:72px}
+  .tc-page{padding:20px 16px}
+  .hdr-tag{display:none}
+  .hdr-date{font-size:12px}
+  .splash-strip{grid-template-columns:1fr;gap:12px}
+  .coach-layout{grid-template-columns:1fr}
+  .coach-side-panel{display:none}
+  .msgs{max-height:260px}
+  .guidelines-layout{grid-template-columns:1fr}
+  .recipes-layout{grid-template-columns:1fr}
+  .thrive-layout{grid-template-columns:1fr}
+  .thrive-intro h2{font-size:22px}
+  .history-layout{grid-template-columns:1fr}
+  .mgrid{grid-template-columns:1fr 1fr}
+  .ba-hdrs{grid-template-columns:1fr 1fr}
+  .ba-grid{grid-template-columns:1fr 1fr}
+  .body-grid{grid-template-columns:1fr 1fr}
+  .thrive-progress-wrap{padding:16px}
+  .th-num{font-size:56px}
 }
-.print-header{display:none}
 
-@media(max-width:680px){.layout{grid-template-columns:1fr}.page{padding:24px 16px 48px}}
+/* ── THRIVE PROGRESS BAR ── */
+.thrive-progress-wrap{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:20px 24px;margin-bottom:24px}
+.thrive-progress-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.thrive-progress-label{font-size:11px;font-weight:600;color:var(--navy);letter-spacing:.07em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.thrive-progress-label .dot-pulse{width:7px;height:7px;border-radius:50%;background:var(--teal);display:inline-block}
+.thrive-progress-pct{font-size:13px;font-weight:700;color:var(--teal)}
+.thrive-progress-track{height:10px;background:var(--teal-light);border-radius:99px;overflow:hidden;position:relative;margin-bottom:10px}
+.thrive-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#1a9e90,var(--teal),#4fd1c4);border-radius:99px;transition:width 1.1s cubic-bezier(.4,0,.2,1);position:relative}
+.thrive-progress-fill::after{content:'';position:absolute;right:0;top:0;bottom:0;width:18px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35));border-radius:99px}
+.thrive-progress-milestones{display:flex;justify-content:space-between;position:relative;padding:0 2px}
+.thrive-progress-milestones::before{content:'';position:absolute;top:6px;left:2px;right:2px;height:1px;background:var(--border);z-index:0}
+.tpm{display:flex;flex-direction:column;align-items:center;gap:4px;z-index:1}
+.tpm-dot{width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--border);transition:all .5s}
+.tpm-dot.reached{background:var(--teal);border-color:var(--teal)}
+.tpm-lbl{font-size:9px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.thrive-progress-msg{font-size:12px;color:var(--muted);font-style:italic;margin-top:10px;text-align:center;min-height:16px;transition:opacity .3s}
 </style>
 </head>
 <body>
-<header>
-  <div class="logo-row">
-    <div class="logo-badge">BLU</div>
-    <span class="logo-name">by <span>ThriveWell</span></span>
-  </div>
-  <div style="display:flex;align-items:center;gap:8px">
-    <button class="tab-btn active" id="tab-calc" onclick="switchTab('calc')">Calculator</button>
-    <button class="tab-btn" id="tab-feedback" onclick="switchTab('feedback')">Feedback</button>
-  </div>
-  <span class="hdr-tag">Longevity Nutrition · Fort Lauderdale</span>
-</header>
+<div class="app">
 
-<!-- PRINT HEADER (only shows when printing) -->
-<div class="print-header" style="display:none;padding:20px 32px 0;max-width:960px;margin:0 auto">
-  <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:2px solid #e2e8ed;margin-bottom:20px">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:34px;height:34px;background:#2ab5a5;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff">BLU</div>
-      <span style="font-size:15px;font-family:'DM Sans',sans-serif">by <strong style="color:#2ab5a5">ThriveWell</strong> · ThriveYears Report</span>
+  <header>
+    <div class="logo-row">
+      <div class="logo-badge">BLU</div>
+      <span class="logo-name">by <span>ThriveWell</span></span>
     </div>
-    <span id="print-date" style="font-size:11px;color:#8a9baa"></span>
-  </div>
+    <div class="header-right">
+      <span class="hdr-tag">Longevity Nutrition · Fort Lauderdale</span>
+      <span class="hdr-date" id="hdr-date"></span>
+    </div>
+  </header>
+
+  <aside>
+    <div class="aside-section">Main</div>
+    <button class="nb active" id="nb-coach" onclick="swBoth('coach')"><span class="ni">🤖</span> BLU Coach</button>
+    <button class="nb" id="nb-guidelines" onclick="swBoth('guidelines')"><span class="ni">📋</span> Guidelines</button>
+    <button class="nb" id="nb-recipes" onclick="swBoth('recipes')"><span class="ni">🍽️</span> Recipes</button>
+    <div class="aside-divider"></div>
+    <div class="aside-section">Track</div>
+    <button class="nb" id="nb-history" onclick="swBoth('history')"><span class="ni">🕐</span> History</button>
+    <button class="nb" id="nb-thrive" onclick="swBoth('thrive')"><span class="ni">✦</span> Thrive Years</button>
+    <div class="side-hero" style="margin-top:auto">
+      <h4>Build <em style="font-style:italic;color:var(--teal)">Thrive Years</em><br>one meal at a time.</h4>
+      <p style="margin-top:6px">Longevity nutrition coaching powered by BLU.</p>
+    </div>
+  </aside>
+
+  <main id="main-content">
+
+    <!-- COACH -->
+    <div class="tc-page active" id="tc-coach">
+      <div class="splash-strip">
+        <div class="splash-hero">
+          <h1>Build <em>Thrive Years</em><br>one meal at a time.</h1>
+          <p style="margin-top:6px">Longevity nutrition coaching · Fort Lauderdale</p>
+        </div>
+        <div class="vc" onclick="openModal('vision')" title="Click to edit">
+          <div class="vc-label"><span></span>Healthspan Vision</div>
+          <div class="vc-text" id="vision-text"><span class="vc-placeholder">I want to feel vibrant at 80…</span></div>
+        </div>
+        <div class="vc" onclick="openModal('purpose')" title="Click to edit">
+          <div class="vc-label"><span></span>My Purpose</div>
+          <div class="vc-text" id="purpose-text"><span class="vc-placeholder">I eat for longevity because…</span></div>
+        </div>
+      </div>
+      <div class="coach-layout">
+        <div>
+          <div class="blu-intro">
+            <div class="blu-avatar">BLU</div>
+            <div class="blu-intro-text">
+              <div class="label">BLU by ThriveWell</div>
+              <div class="tagline">Your longevity nutrition coach</div>
+            </div>
+          </div>
+          <div class="coach-chips">
+            <button class="cchip" onclick="sendChip('What should I eat for a high-fiber breakfast?')">High-fiber breakfast</button>
+            <button class="cchip" onclick="sendChip('Give me tips to reach my daily fiber goal of 40-60g.')">Fiber goal tips</button>
+            <button class="cchip" onclick="sendChip('What are the best plant protein sources for longevity?')">Plant proteins</button>
+            <button class="cchip" onclick="sendChip('Suggest a longevity-focused dinner idea for tonight.')">Longevity dinner</button>
+            <button class="cchip" onclick="sendChip('What are the top 10 longevity foods I should eat regularly?')">Top longevity foods</button>
+          </div>
+          <div class="chat-card">
+            <div class="card-label">BLU Coach</div>
+            <div class="msgs" id="chat-msgs">
+              <div class="msg-bot">Hello! I'm your BLU nutrition coach — here to help you build Thrive Years through every meal. Ask me anything about fiber, plant proteins, healthy fats, or longevity nutrition. 🌿</div>
+            </div>
+            <div class="inp-row">
+              <input class="chat-inp" id="chat-inp" placeholder="Ask BLU anything…" onkeydown="if(event.key==='Enter')sendChat()">
+              <button class="send-btn" id="send-btn" onclick="sendChat()">Send ↗</button>
+            </div>
+          </div>
+        </div>
+        <div class="coach-side-panel">
+          <div class="panel-card">
+            <h4>Today's BLU Score</h4>
+            <div style="font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--teal);line-height:1;margin-bottom:6px">—</div>
+            <div style="font-size:12px;color:var(--muted)">Log meals to see your score</div>
+          </div>
+          <div class="panel-card">
+            <h4>Fiber Intake</h4>
+            <div class="stat-row"><span class="stat-lbl">Today</span><span class="stat-val">—</span></div>
+            <div class="stat-row"><span class="stat-lbl">Goal</span><span class="stat-val">40–60g</span></div>
+            <div class="stat-row"><span class="stat-lbl">Weekly avg</span><span class="stat-val">—</span></div>
+          </div>
+          <div class="panel-card">
+            <h4>Quick Stats</h4>
+            <div class="stat-row"><span class="stat-lbl">Meals logged</span><span class="stat-val">0</span></div>
+            <div class="stat-row"><span class="stat-lbl">Thrive Years</span><span class="stat-val">—</span></div>
+            <div class="stat-row"><span class="stat-lbl">Risk reduction</span><span class="stat-val">—</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIDELINES -->
+    <div class="tc-page" id="tc-guidelines">
+      <div class="sec-hd"><h2>Nutritional Guidelines</h2></div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6">Evidence-based guidelines that form the foundation of your BLU longevity plan. Click any card to expand.</p>
+      <div class="guidelines-layout">
+        <div class="g-item" id="g0"><button class="g-hdr" onclick="tog('g0')"><span class="g-icon">🌾</span><div class="g-meta"><h3>Fiber</h3><p>40–60g of fiber per day</p></div><span class="g-arr">▾</span></button><div class="g-body">Dietary fiber feeds your gut microbiome, regulates blood sugar, lowers LDL cholesterol, and reduces systemic inflammation — cornerstones of a long healthspan.<div class="g-tip">Today → Add 2 tbsp ground flaxseed (+6g), lentils at lunch (+16g), avocado at dinner (+10g).</div></div></div>
+        <div class="g-item" id="g1"><button class="g-hdr" onclick="tog('g1')"><span class="g-icon">🥦</span><div class="g-meta"><h3>Protein</h3><p>Prioritize plant proteins first</p></div><span class="g-arr">▾</span></button><div class="g-body">Plant proteins come bundled with fiber and phytonutrients. Aim for 0.7–1g per pound of bodyweight daily, with plants leading every meal.<div class="g-tip">Today → Swap ground beef for lentils — same satiety, triple the fiber.</div></div></div>
+        <div class="g-item" id="g2"><button class="g-hdr" onclick="tog('g2')"><span class="g-icon">🫒</span><div class="g-meta"><h3>Fats</h3><p>Omega-3s · Eliminate trans fats</p></div><span class="g-arr">▾</span></button><div class="g-body">Omega-3s reduce cellular inflammation and protect cardiovascular health. Trans fats accelerate biological aging.<div class="g-tip">Today → Drizzle walnut oil on your salad and add chia seeds to yogurt.</div></div></div>
+        <div class="g-item" id="g3"><button class="g-hdr" onclick="tog('g3')"><span class="g-icon">💧</span><div class="g-meta"><h3>Hydration</h3><p>8+ glasses of water daily</p></div><span class="g-arr">▾</span></button><div class="g-body">Proper hydration supports every cellular function. Even mild dehydration impairs cognition and energy.<div class="g-tip">Today → 16oz of water before coffee — rehydrates after sleep.</div></div></div>
+        <div class="g-item" id="g4"><button class="g-hdr" onclick="tog('g4')"><span class="g-icon">🦠</span><div class="g-meta"><h3>Gut Health</h3><p>Fermented foods every day</p></div><span class="g-arr">▾</span></button><div class="g-body">Your gut microbiome is directly linked to immune function, mood, metabolism, and longevity.<div class="g-tip">Today → Add kimchi to lunch or stir miso into your salad dressing.</div></div></div>
+        <div class="g-item" id="g5"><button class="g-hdr" onclick="tog('g5')"><span class="g-icon">🌱</span><div class="g-meta"><h3>Meal Timing</h3><p>Eat within a 10-hour window</p></div><span class="g-arr">▾</span></button><div class="g-body">Time-restricted eating activates autophagy — your body's cellular clean-up process — and improves metabolic health.<div class="g-tip">Today → First meal at 8am → finish eating by 6pm.</div></div></div>
+      </div>
+    </div>
+
+    <!-- RECIPES -->
+    <div class="tc-page" id="tc-recipes">
+      <div class="sec-hd"><h2>Longevity Recipes</h2></div>
+      <div class="recipes-layout">
+        <div>
+          <div class="rcard"><div class="rcard-top"><h3>Quinoa Grain Bowl</h3><span class="fbadge">38g fiber</span></div><p>Hearty quinoa base with roasted veg, chickpeas, and tahini dressing.</p><div class="rtags"><span class="rtag">vegan</span><span class="rtag">high-fiber</span><span class="rtag">lunch</span></div></div>
+          <div class="rcard"><div class="rcard-top"><h3>Chia Smoothie Bowl</h3><span class="fbadge">18g fiber</span></div><p>Blended acai and banana with chia seeds, berries, and granola.</p><div class="rtags"><span class="rtag">breakfast</span><span class="rtag">omega-3</span></div></div>
+          <div class="rcard"><div class="rcard-top"><h3>Lentil Soup + Sourdough</h3><span class="fbadge">22g fiber</span></div><p>Warming red lentil soup with turmeric and fermented sourdough.</p><div class="rtags"><span class="rtag">dinner</span><span class="rtag">gut-health</span></div></div>
+        </div>
+        <div>
+          <div class="ai-box">
+            <h3>✨ Generate a BLU longevity recipe with AI</h3>
+            <div class="mtype">
+              <button class="mt sel" data-meal="Breakfast">🌅 Breakfast</button>
+              <button class="mt" data-meal="Lunch">☀️ Lunch</button>
+              <button class="mt" data-meal="Dinner">🌙 Dinner</button>
+              <button class="mt" data-meal="Snack">🍎 Snack</button>
+            </div>
+            <button class="gen-btn" id="gen-btn" onclick="generateRecipe()">✨ Generate Recipe</button>
+            <div class="ai-result" id="ai-result"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="tc-page" id="tc-history">
+      <div class="sec-hd"><h2>History</h2></div>
+      <div class="history-layout">
+        <div class="wcard">
+          <div class="wcard-lbl"><span></span>Weekly BLU Score</div>
+          <div style="font-size:13px;color:var(--muted);padding:16px 0;text-align:center;font-style:italic">No history yet — log meals to build your score history.</div>
+        </div>
+        <div>
+          <div class="wcard">
+            <div class="wcard-lbl"><span></span>Avg Daily Fiber</div>
+            <div style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--teal);line-height:1">—</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px">Goal: 40–60g · Log meals to track</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THRIVE YEARS -->
+    <div class="tc-page" id="tc-thrive">
+
+      <!-- PROGRESS BAR -->
+      <div class="thrive-progress-wrap">
+        <div class="thrive-progress-top">
+          <div class="thrive-progress-label">
+            <span class="dot-pulse"></span>
+            BLU Longevity Journey
+          </div>
+          <div class="thrive-progress-pct" id="progress-pct">—</div>
+        </div>
+        <div class="thrive-progress-track">
+          <div class="thrive-progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="thrive-progress-milestones">
+          <div class="tpm"><div class="tpm-dot" id="ms-0"></div><div class="tpm-lbl">Starting</div></div>
+          <div class="tpm"><div class="tpm-dot" id="ms-1"></div><div class="tpm-lbl">Improving</div></div>
+          <div class="tpm"><div class="tpm-dot" id="ms-2"></div><div class="tpm-lbl">Thriving</div></div>
+          <div class="tpm"><div class="tpm-dot" id="ms-3"></div><div class="tpm-lbl">Flourishing</div></div>
+          <div class="tpm"><div class="tpm-dot" id="ms-4"></div><div class="tpm-lbl">Keep going ✦</div></div>
+        </div>
+        <div class="thrive-progress-msg" id="progress-msg">Calculate your Thrive Years to see your progress.</div>
+      </div>
+
+      <div class="thrive-intro">
+        <h2>Calculate Your <em>Thrive Years</em></h2>
+        <p>Enter your before &amp; after fitness metrics to see your mortality risk reduction and the healthy years you're building.</p>
+      </div>
+      <div class="thrive-layout">
+        <div class="wcard">
+          <div class="wcard-lbl"><span></span>Your Fitness Profile</div>
+          <div class="body-grid">
+            <div><div class="flbl">Body Weight (lbs)</div><input class="finput" id="t-weight" type="number" placeholder="e.g. 175" min="80" max="400"></div>
+            <div><div class="flbl">Current Age</div><input class="finput" id="t-age" type="number" placeholder="e.g. 45" min="18" max="90"></div>
+          </div>
+          <div class="divider"></div>
+          <div class="ba-hdrs">
+            <div class="ba-h bef"><div class="ba-dot-grey"></div>Before</div>
+            <div class="ba-h aft"><div class="ba-dot-teal"></div>After</div>
+          </div>
+          <div class="mrow"><div class="mlbl"><span>🫁</span>VO₂ Max (mL/lb/min)</div><div class="ba-grid"><input class="finput" id="t-vo2b" type="number" placeholder="e.g. 28" step="0.1"><input class="finput after" id="t-vo2a" type="number" placeholder="e.g. 33" step="0.1"></div></div>
+          <div class="mrow"><div class="mlbl"><span>💪</span>Lean Muscle Mass (lbs)</div><div class="ba-grid"><input class="finput" id="t-lmmb" type="number" placeholder="e.g. 120"><input class="finput after" id="t-lmma" type="number" placeholder="e.g. 128"></div></div>
+          <div class="mrow"><div class="mlbl"><span>🔥</span>Visceral Fat (lbs)</div><div class="ba-grid"><input class="finput" id="t-vfb" type="number" placeholder="e.g. 10" step="0.1"><input class="finput after" id="t-vfa" type="number" placeholder="e.g. 7" step="0.1"></div></div>
+          <div class="mrow"><div class="mlbl"><span>✊</span>Grip Strength (lbs)</div><div class="ba-grid"><input class="finput" id="t-gsb" type="number" placeholder="e.g. 80"><input class="finput after" id="t-gsa" type="number" placeholder="e.g. 95"></div></div>
+          <button class="calc-btn" id="calc-btn" onclick="calcThrive()">Calculate Thrive Years →</button>
+        </div>
+        <div>
+          <div class="thrive-hero">
+            <div class="th-eyebrow">Estimated Thrive Years Gained</div>
+            <div><span class="th-num" id="th-num">—</span><span class="th-unit" id="th-unit"></span></div>
+            <div class="th-sub" id="th-sub">Enter your metrics and calculate</div>
+          </div>
+          <div class="wcard" style="position:relative">
+            <div class="wcard-lbl"><span></span>Risk Summary</div>
+            <div class="mgrid">
+              <div class="mtile"><div class="val navy" id="r-popavg">—</div><div class="lbl">Avg 10-yr Death Risk<br><span style="font-size:8px;opacity:.7">for your age group</span></div><button class="info-btn" onclick="showInfo('popavg',event)">ℹ</button></div>
+              <div class="mtile"><div class="val navy" id="r-before">—</div><div class="lbl">Your 10-yr Risk Before<br><span style="font-size:8px;opacity:.7">population baseline</span></div><button class="info-btn" onclick="showInfo('before',event)">ℹ</button></div>
+              <div class="mtile"><div class="val" id="r-after">—</div><div class="lbl">Your 10-yr Risk After<br><span style="font-size:8px;opacity:.7">with improved fitness</span></div><button class="info-btn" onclick="showInfo('after',event)">ℹ</button></div>
+              <div class="mtile"><div class="val" id="r-ratio">—</div><div class="lbl">Relative Risk Ratio<br><span style="font-size:8px;opacity:.7">after ÷ before</span></div><button class="info-btn" onclick="showInfo('ratio',event)">ℹ</button></div>
+              <div class="mtile full"><div class="val" id="r-improve">—</div><div class="lbl">Overall Risk Improvement<br><span style="font-size:8px;opacity:.7">reduction in personal mortality risk</span></div><button class="info-btn" onclick="showInfo('improve',event)">ℹ</button></div>
+            </div>
+            <div class="bann" id="r-bann">Calculate your metrics to see your risk summary.</div>
+            <div id="info-popup" style="display:none;position:absolute;background:var(--white);border:1px solid var(--teal-mid);border-radius:12px;padding:14px 16px;max-width:240px;font-size:12px;color:var(--navy);line-height:1.6;z-index:50;box-shadow:0 4px 16px rgba(26,46,58,0.12)">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <span style="font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.06em;text-transform:uppercase" id="info-title"></span>
+                <button onclick="document.getElementById('info-popup').style.display='none'" style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);line-height:1;padding:0">×</button>
+              </div>
+              <div id="info-body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAV (mobile only) -->
+  <nav class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <button class="bnav-btn active" id="bn-coach" onclick="swBoth('coach')"><span class="bni">🤖</span><span class="bnlbl">Coach</span></button>
+      <button class="bnav-btn" id="bn-guidelines" onclick="swBoth('guidelines')"><span class="bni">📋</span><span class="bnlbl">Guide</span></button>
+      <button class="bnav-btn" id="bn-recipes" onclick="swBoth('recipes')"><span class="bni">🍽️</span><span class="bnlbl">Recipes</span></button>
+      <button class="bnav-btn" id="bn-history" onclick="swBoth('history')"><span class="bni">🕐</span><span class="bnlbl">History</span></button>
+      <button class="bnav-btn" id="bn-thrive" onclick="swBoth('thrive')"><span class="bni">✦</span><span class="bnlbl">Thrive</span></button>
+    </div>
+  </nav>
+
 </div>
 
-<div class="page">
-  <!-- PROGRESS BAR -->
-  <div class="prog-wrap">
-    <div class="prog-top">
-      <div class="prog-lbl"><span class="dot-pulse"></span>BLU Longevity Journey</div>
-      <div class="prog-pct" id="prog-pct">—</div>
-    </div>
-    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
-    <div class="milestones">
-      <div class="tpm"><div class="tpm-dot" id="ms-0"></div><div class="tpm-lbl">Starting</div></div>
-      <div class="tpm"><div class="tpm-dot" id="ms-1"></div><div class="tpm-lbl">Improving</div></div>
-      <div class="tpm"><div class="tpm-dot" id="ms-2"></div><div class="tpm-lbl">Thriving</div></div>
-      <div class="tpm"><div class="tpm-dot" id="ms-3"></div><div class="tpm-lbl">Flourishing</div></div>
-      <div class="tpm"><div class="tpm-dot" id="ms-4"></div><div class="tpm-lbl">Keep going ✦</div></div>
-    </div>
-    <div class="prog-msg" id="prog-msg">Calculate your Thrive Years to see your progress.</div>
-  </div>
-
-  <!-- INTRO -->
-  <div class="thrive-intro">
-    <h1>Calculate Your <em>Thrive Years</em></h1>
-    <p>Enter before &amp; after fitness metrics to see mortality risk reduction and the healthy years you're building.</p>
-  </div>
-
-  <div class="layout">
-    <!-- LEFT: INPUTS -->
-    <div class="card">
-      <div class="card-lbl"><span></span>Client Profile</div>
-      <div class="row3">
-        <div><div class="flbl">Client Name</div><input class="inp" id="t-name" type="text" placeholder="e.g. Sam"></div>
-        <div><div class="flbl">Age</div><input class="inp" id="t-age" type="number" placeholder="e.g. 48"></div>
-        <div><div class="flbl">Weight (lbs)</div><input class="inp" id="t-weight" type="number" placeholder="e.g. 182"></div>
-      </div>
-      <div class="div"></div>
-      <div class="ba-hdrs">
-        <div class="ba-h bef"><div class="dot-grey"></div>Before</div>
-        <div class="ba-h aft"><div class="dot-teal"></div>After</div>
-      </div>
-      <div class="mrow">
-        <div class="mlbl">🫁 VO₂ Max (mL/lb/min)</div>
-        <div class="bagrid">
-          <input class="inp" id="t-vo2b" type="number" placeholder="e.g. 11.5" step="0.1">
-          <input class="inp after" id="t-vo2a" type="number" placeholder="e.g. 13.8" step="0.1">
-        </div>
-      </div>
-      <div class="mrow">
-        <div class="mlbl">💪 Lean Muscle Mass (lbs)</div>
-        <div class="bagrid">
-          <input class="inp" id="t-lmmb" type="number" placeholder="e.g. 122">
-          <input class="inp after" id="t-lmma" type="number" placeholder="e.g. 131">
-        </div>
-      </div>
-      <div class="mrow">
-        <div class="mlbl">🔥 Visceral Fat (lbs)</div>
-        <div class="bagrid">
-          <input class="inp" id="t-vfb" type="number" placeholder="e.g. 10.2" step="0.1">
-          <input class="inp after" id="t-vfa" type="number" placeholder="e.g. 7.8" step="0.1">
-        </div>
-      </div>
-      <div class="mrow">
-        <div class="mlbl">✊ Grip Strength (Dominant Hand - lbs)</div>
-        <div class="bagrid">
-          <input class="inp" id="t-gsb" type="number" placeholder="e.g. 68">
-          <input class="inp after" id="t-gsa" type="number" placeholder="e.g. 84">
-        </div>
-      </div>
-      <button class="calc-btn" onclick="calcThrive()">Calculate Thrive Years →</button>
-      <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:8px;font-style:italic">Blank fields will use age-group population averages</div>
-
-      <!-- BIGGEST OPPORTUNITY -->
-      <div class="opp-card" id="opp-card">
-        <div class="card-lbl"><span></span>Biggest Opportunity</div>
-        <div class="opp-sublbl">Coach's Assessment</div>
-        <div class="bullet-list" id="assess-list"></div>
-        <button class="add-btn" onclick="addBullet('assess-list','')">＋ Add point</button>
-        <div class="opp-sublbl">Actions to Get There</div>
-        <div class="bullet-list" id="action-list"></div>
-        <button class="add-btn" onclick="addBullet('action-list','')">＋ Add action</button>
-      </div>
-    </div>
-
-    <!-- RIGHT: RESULTS -->
-    <div>
-      <!-- PERSONALIZATION -->
-      <div class="personal" id="personal">
-        <div class="per-eye" id="per-eye">YOUR RESULTS</div>
-        <div class="per-msg" id="per-msg"></div>
-        <div class="per-contrib" id="per-contrib"></div>
-      </div>
-
-      <!-- HERO -->
-      <div class="hero">
-        <div class="hero-eye">Estimated ThriveYears Impacted</div>
-        <div><span class="hero-num" id="th-num">—</span><span class="hero-unit" id="th-unit"></span></div>
-        <div class="hero-sub" id="th-sub">Enter your metrics and calculate</div>
-      </div>
-
-      <!-- RISK SUMMARY -->
-      <div class="card" style="position:relative">
-        <div class="card-lbl"><span></span>Risk Summary</div>
-        <div class="mgrid">
-          <div class="tile"><div class="val nv" id="r-popavg">—</div><div class="lbl">Avg 10-yr Mortality Risk<br><span style="font-size:8px;opacity:.7">for your age group</span></div><div class="tip-wrap"><button class="info-btn">ℹ</button><div class="tooltip"><strong>Avg 10-yr Mortality Risk</strong>Out of 100 people your age, roughly how many are expected to die in the next 10 years — the population average for your age group.</div></div></div>
-          <div class="tile"><div class="val nv" id="r-before">—</div><div class="lbl">Your 10-yr Risk Before<br><span style="font-size:8px;opacity:.7">population baseline</span></div><div class="tip-wrap"><button class="info-btn">ℹ</button><div class="tooltip"><strong>Your Risk Before</strong>Your estimated 10-year mortality risk based on your original fitness metrics, relative to the population average for your age.</div></div></div>
-          <div class="tile"><div class="val" id="r-after">—</div><div class="lbl">Your 10-yr Risk After<br><span style="font-size:8px;opacity:.7">with improved fitness</span></div><div class="tip-wrap"><button class="info-btn">ℹ</button><div class="tooltip"><strong>Your Risk After</strong>Your new estimated 10-year mortality risk after fitness improvements. The lower this is, the better.</div></div></div>
-          <div class="tile"><div class="val" id="r-ratio">—</div><div class="lbl">Relative Risk Ratio<br><span style="font-size:8px;opacity:.7">after ÷ before</span></div><div class="tip-wrap"><button class="info-btn">ℹ</button><div class="tooltip"><strong>Relative Risk Ratio</strong>Your risk after divided by your risk before. Below 1.0 means risk went down — e.g. 0.72 means 28% lower risk.</div></div></div>
-          <div class="tile full"><div class="val" id="r-improve">—</div><div class="lbl">Overall Risk Improvement<br><span style="font-size:8px;opacity:.7">reduction in personal mortality risk</span></div><div class="tip-wrap"><button class="info-btn">ℹ</button><div class="tooltip"><strong>Overall Risk Improvement</strong>The total percentage reduction in your personal mortality risk from all four metric improvements combined.</div></div></div>
-        </div>
-        <div class="bann" id="r-bann">Calculate your metrics to see your risk summary.</div>
-      </div>
-
-      <!-- PRINT -->
-      <button class="print-btn" id="print-btn" onclick="doPrint()">🖨️ Print One Pager</button>
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <h3 id="modal-title">Edit</h3>
+    <p id="modal-desc"></p>
+    <textarea id="modal-input" placeholder=""></textarea>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModalDirect()">Cancel</button>
+      <button class="modal-save" onclick="saveModal()">Save</button>
     </div>
   </div>
-
-  <!-- FEEDBACK PAGE -->
-  <div id="feedback-page" style="display:none;max-width:640px;margin:0 auto">
-    <div class="card" style="margin-bottom:16px">
-      <div class="card-lbl"><span></span>Share Your Feedback</div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6">Have a suggestion, question, or idea? We'd love to hear from you.</p>
-      <div style="margin-bottom:12px">
-        <div class="flbl">Your Name</div>
-        <input class="inp" id="fb-name" type="text" placeholder="e.g. Sam">
-      </div>
-      <div style="margin-bottom:16px">
-        <div class="flbl">Your Feedback or Question</div>
-        <textarea id="fb-message" placeholder="Share your thoughts, suggestions, or questions..." style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--navy);resize:none;outline:none;transition:border-color .15s;line-height:1.6;height:110px" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-      </div>
-      <button class="calc-btn" style="margin-top:0" onclick="submitFeedback()">Submit Feedback →</button>
-      <div id="fb-success" style="display:none;margin-top:12px;background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--teal);font-weight:500;text-align:center">✓ Thank you! Your feedback has been received.</div>
-      <div id="fb-error" style="display:none;margin-top:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:12px 14px;font-size:13px;color:#dc2626;text-align:center"></div>
-    </div>
-    <div class="card">
-      <div class="card-lbl"><span></span>Admin Access</div>
-      <div id="admin-locked">
-        <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Enter the password to view all submitted feedback.</p>
-        <div style="display:flex;gap:10px">
-          <input class="inp" id="admin-pw" type="password" placeholder="Password" style="flex:1" onkeydown="if(event.key==='Enter')checkPassword()">
-          <button class="calc-btn" style="width:auto;padding:11px 20px;margin-top:0" onclick="checkPassword()">Unlock</button>
-        </div>
-        <div id="pw-error" style="display:none;margin-top:10px;font-size:12px;color:#dc2626">Incorrect password. Try again.</div>
-      </div>
-      <div id="admin-unlocked" style="display:none">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <span style="font-size:13px;color:var(--muted)" id="fb-count">Loading...</span>
-          <button onclick="loadAllFeedback()" style="background:none;border:none;cursor:pointer;font-size:12px;color:var(--teal);font-family:inherit;font-weight:600">↻ Refresh</button>
-        </div>
-        <div id="fb-list" style="display:flex;flex-direction:column;gap:10px"></div>
-      </div>
-    </div>
-  </div>
-
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ── UTILS ──
-function toast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+const TABS=['coach','guidelines','recipes','history','thrive'];
+function swBoth(t){
+  TABS.forEach(id=>{
+    document.getElementById('tc-'+id)?.classList.toggle('active',id===t);
+    document.getElementById('nb-'+id)?.classList.toggle('active',id===t);
+    document.getElementById('bn-'+id)?.classList.toggle('active',id===t);
+  });
+  document.getElementById('main-content').scrollTop=0;
+}
+
+function tog(id){document.getElementById(id)?.classList.toggle('open')}
+
+const d=new Date();
+const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const el=document.getElementById('hdr-date');
+if(el)el.textContent=days[d.getDay()]+', '+months[d.getMonth()]+' '+d.getDate();
+
+document.querySelectorAll('.mt').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    this.closest('.mtype').querySelectorAll('.mt').forEach(b=>b.classList.remove('sel'));
+    this.classList.add('sel');
+  });
+});
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-// ── PROGRESS ──
-const PROG_MSGS=[
-  'Every session is a step forward. Keep building those Thrive Years. 🌿',
+let currentModal='';
+const visionData={vision:'',purpose:''};
+function openModal(type){
+  currentModal=type;
+  const overlay=document.getElementById('modal-overlay');
+  const title=document.getElementById('modal-title');
+  const desc=document.getElementById('modal-desc');
+  const input=document.getElementById('modal-input');
+  if(type==='vision'){
+    title.textContent='Your Healthspan Vision';
+    desc.textContent='Describe what vibrant health looks like for you at 80. This is your north star.';
+    input.placeholder='I want to feel vibrant at 80, hiking mountains, playing with grandchildren...';
+    input.value=visionData.vision;
+  } else {
+    title.textContent='My Purpose';
+    desc.textContent='Why do you eat for longevity? Your purpose keeps you anchored on hard days.';
+    input.placeholder='I eat for longevity because my family deserves the best version of me...';
+    input.value=visionData.purpose;
+  }
+  overlay.classList.add('show');
+  setTimeout(()=>input.focus(),200);
+}
+function closeModal(e){if(e.target===document.getElementById('modal-overlay'))closeModalDirect()}
+function closeModalDirect(){document.getElementById('modal-overlay').classList.remove('show')}
+function saveModal(){
+  const val=document.getElementById('modal-input').value.trim();
+  if(currentModal==='vision'){
+    visionData.vision=val;
+    const el=document.getElementById('vision-text');
+    el.innerHTML=val?val:'<span class="vc-placeholder">I want to feel vibrant at 80…</span>';
+  } else {
+    visionData.purpose=val;
+    const el=document.getElementById('purpose-text');
+    el.innerHTML=val?val:'<span class="vc-placeholder">I eat for longevity because…</span>';
+  }
+  closeModalDirect();
+  if(val)showToast('✓ Saved');
+}
+
+async function callAPI(messages,system=''){
+  const body={messages};
+  if(system)body.system=system;
+  const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(!res.ok){const err=await res.text();throw new Error(err);}
+  const data=await res.json();
+  return data.content?.map(c=>c.text||'').join('')||'Sorry, I could not generate a response.';
+}
+
+function formatMarkdown(text){
+  const lines=text.split('\n');
+  let html='';
+  let inUl=false;
+  let inOl=false;
+  for(let i=0;i<lines.length;i++){
+    let line=lines[i];
+    line=line.replace(/\*\*([^*]+):\*\*/g,'<strong>$1:</strong>');
+    line=line.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+    if(/^\d+\.\s+/.test(line)){
+      if(inUl){html+='</ul>';inUl=false;}
+      if(!inOl){html+='<ol>';inOl=true;}
+      html+='<li>'+line.replace(/^\d+\.\s+/,'')+'</li>';
+    } else if(/^[-*•]\s+/.test(line)){
+      if(inOl){html+='</ol>';inOl=false;}
+      if(!inUl){html+='<ul>';inUl=true;}
+      html+='<li>'+line.replace(/^[-*•]\s+/,'')+'</li>';
+    } else if(line.trim()===''){
+      if(inUl){html+='</ul>';inUl=false;}
+      if(inOl){html+='</ol>';inOl=false;}
+      html+='<br>';
+    } else if(line.includes('<strong>')){
+      if(inUl){html+='</ul>';inUl=false;}
+      if(inOl){html+='</ol>';inOl=false;}
+      html+='<p style="margin-top:12px;margin-bottom:4px;">'+line+'</p>';
+    } else {
+      if(inUl){html+='</ul>';inUl=false;}
+      if(inOl){html+='</ol>';inOl=false;}
+      html+='<p>'+line+'</p>';
+    }
+  }
+  if(inUl)html+='</ul>';
+  if(inOl)html+='</ol>';
+  return html;
+}
+
+const chatHistory=[];
+function appendMsg(text,role){
+  const msgs=document.getElementById('chat-msgs');
+  const div=document.createElement('div');
+  div.className=role==='user'?'msg-user':'msg-bot';
+  div.textContent=text;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+  return div;
+}
+function appendTyping(){
+  const msgs=document.getElementById('chat-msgs');
+  const div=document.createElement('div');
+  div.className='msg-typing';
+  div.innerHTML='<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+  return div;
+}
+async function sendChat(){
+  const inp=document.getElementById('chat-inp');
+  const btn=document.getElementById('send-btn');
+  const text=inp.value.trim();
+  if(!text)return;
+  inp.value='';
+  btn.disabled=true;
+  appendMsg(text,'user');
+  chatHistory.push({role:'user',content:text});
+  const typing=appendTyping();
+  try{
+    const SYSTEM=`You are BLU, a longevity nutrition coach for ThriveWell based in Fort Lauderdale. You specialize in evidence-based nutrition for healthspan extension, including high-fiber diets (40-60g/day), plant proteins, omega-3s, gut microbiome health, and time-restricted eating. Be warm, encouraging, specific, and scientifically grounded. Keep responses concise (2-4 short paragraphs max). Use emojis sparingly. Always tie advice back to longevity and "Thrive Years".`;
+    const reply=await callAPI([...chatHistory],SYSTEM);
+    typing.remove();
+    appendMsg(reply,'bot');
+    chatHistory.push({role:'assistant',content:reply});
+  }catch(e){
+    typing.remove();
+    appendMsg('Sorry, I had trouble connecting. Please try again.','bot');
+  }
+  btn.disabled=false;
+  inp.focus();
+}
+function sendChip(text){
+  document.getElementById('chat-inp').value=text;
+  sendChat();
+  swBoth('coach');
+}
+
+async function generateRecipe(){
+  const btn=document.getElementById('gen-btn');
+  const result=document.getElementById('ai-result');
+  const selMeal=document.querySelector('.mt.sel')?.dataset?.meal||'Breakfast';
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>Generating…';
+  result.classList.remove('show');
+  try{
+    const SYSTEM=`You are BLU, a longevity nutrition chef. Create a detailed recipe optimized for longevity.
+
+Format your response EXACTLY like this structure:
+**Recipe Name:** [name here]
+**Fiber Content:** [X grams per serving]
+**Key Longevity Benefits:** [2-3 sentences]
+**Ingredients:**
+- ingredient 1
+- ingredient 2
+- ingredient 3
+**Instructions:**
+1. Step one
+2. Step two
+3. Step three
+
+Be specific, realistic and appetizing.`;
+    const reply=await callAPI([{role:'user',content:`Create a longevity-optimized ${selMeal} recipe that is high in fiber, includes plant proteins, and supports gut health and healthy aging.`}],SYSTEM);
+    result.innerHTML=formatMarkdown(reply);
+    result.classList.add('show');
+  }catch(e){
+    result.textContent='Could not generate recipe. Please try again.';
+    result.classList.add('show');
+  }
+  btn.disabled=false;
+  btn.innerHTML='✨ Generate Recipe';
+}
+
+// ── PROGRESS BAR ──
+const PROGRESS_MESSAGES=[
+  'Every meal is a step forward. Keep building those Thrive Years. 🌿',
   'Great progress! Consistency is the secret ingredient.',
   'You\'re thriving. Your future self thanks you.',
   'Remarkable improvement. The BLU lifestyle is working.',
   'Extraordinary. Keep going — longevity is a lifelong journey. ✦'
 ];
-function updateProgress(pct){
-  const d=Math.min(Math.max(pct,0)*1.4,78);
+function updateProgressBar(pctImprove){
+  // Map risk improvement to a display % that never exceeds ~78%
+  // so there's always more to strive for
+  const raw=Math.max(0,pctImprove);
+  const display=Math.min(raw*1.4,78);
+  const fill=document.getElementById('progress-fill');
+  const pctEl=document.getElementById('progress-pct');
+  const msgEl=document.getElementById('progress-msg');
+  // Slight delay so the animation is visible
   setTimeout(()=>{
-    document.getElementById('prog-fill').style.width=d+'%';
-    document.getElementById('prog-pct').textContent=d.toFixed(0)+'%';
+    fill.style.width=display+'%';
+    pctEl.textContent=display.toFixed(0)+'%';
   },100);
-  [10,25,45,62,78].forEach((t,i)=>document.getElementById('ms-'+i)?.classList.toggle('reached',d>=t));
-  document.getElementById('prog-msg').textContent=PROG_MSGS[d<15?0:d<30?1:d<50?2:d<65?3:4];
-}
-
-// ── BULLET LIST ──
-function addBullet(listId, text){
-  const list=document.getElementById(listId);
-  const item=document.createElement('div');
-  item.className='bitem';
-  const ta=document.createElement('textarea');
-  ta.className='btxt';
-  ta.rows=1;
-  ta.value=text||'';
-  ta.placeholder='Type here...';
-  ta.oninput=()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'};
-  item.innerHTML='<div class="bdot"></div>';
-  item.appendChild(ta);
-  list.appendChild(item);
-  if(!text) setTimeout(()=>{ta.focus();},30);
-  setTimeout(()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'},10);
-}
-
-// ── OPPORTUNITY (dynamic) ──
-function populateOpp(ty, afterVals, avgs){
-  // Find the metric with the most room for improvement vs population average
-  const gaps={
-    'VO₂ Max':      (avgs.vo2    - afterVals.vo2)    / avgs.vo2,
-    'Lean Muscle':  (avgs.muscle - afterVals.muscle)  / avgs.muscle,
-    'Visceral Fat': (afterVals.fat - avgs.fat)         / avgs.fat,
-    'Grip Strength':(avgs.grip   - afterVals.grip)    / avgs.grip,
-  };
-  const oppKey=Object.keys(gaps).reduce((a,b)=>gaps[a]>gaps[b]?a:b);
-  const gap=gaps[oppKey];
-
-  // Tone based on ThriveYears gained/lost — 10 mirrored bands (5 positive, 5 negative)
-  const tone =
-    ty>=7?'elite':
-    ty>=5?'exceptional':
-    ty>=3.5?'strong':
-    ty>=2?'progressing':
-    ty>=0?'building':
-    ty>=-2?'declining-mild':
-    ty>=-3.5?'declining-progressing':
-    ty>=-5?'declining-strong':
-    ty>=-7?'declining-exceptional':
-    'declining-elite';
-
-  // Tone-based opening line — distinct advice for every band, positive and negative
-  const openingMap={
-    elite:       `With ${ty.toFixed(1)} Thrive Years gained, this client has achieved elite-level longevity progress — few people reach this threshold. The priority now is protecting and compounding these gains over decades.`,
-    exceptional: `With ${ty.toFixed(1)} Thrive Years gained, this client has made exceptional progress across their fitness profile. The focus shifts to sustaining momentum and fine-tuning the remaining opportunity below.`,
-    strong:      `With ${ty.toFixed(1)} Thrive Years gained, this client is on a strong longevity trajectory. Targeted work on the key area below will push results into the exceptional range.`,
-    progressing: `With ${ty.toFixed(1)} Thrive Years gained, this client is making real, measurable progress. Consistent effort in the area below will meaningfully accelerate the next phase.`,
-    building:    `With ${ty.toFixed(1)} Thrive Years gained, this client is beginning to build longevity momentum. The opportunity below represents the highest-leverage next step.`,
-    'declining-mild':         `This client's metrics show a slight increase in mortality risk (${Math.abs(ty).toFixed(1)} Thrive Years). This is an early signal, not a setback — small, consistent changes now will reverse the trend quickly.`,
-    'declining-progressing':  `This client's metrics show a moderate increase in mortality risk (${Math.abs(ty).toFixed(1)} Thrive Years). The trend is worth addressing directly — a focused plan over the next 60–90 days should turn this around.`,
-    'declining-strong':       `This client's metrics show a clear downward trend in their longevity profile (${Math.abs(ty).toFixed(1)} Thrive Years). This warrants real attention — a structured, prioritized plan is the right next step rather than broad changes everywhere at once.`,
-    'declining-exceptional':  `This client's metrics show a significant increase in mortality risk (${Math.abs(ty).toFixed(1)} Thrive Years). This level of change is substantial enough to merit a closer look at what shifted, and a clear, prioritized plan going forward.`,
-    'declining-elite':        `This client's metrics show a substantial increase in mortality risk (${Math.abs(ty).toFixed(1)} Thrive Years). This is significant enough to treat as a priority — a thorough review of all four metrics with the personal trainer is recommended before setting next steps.`,
-  };
-
-  // Metric-specific action content (Actions stay specific to the priority metric;
-  // Assessment below is generic across all four)
-  const metricContent={
-    'VO₂ Max':{
-      actions:(gap>0?[
-        `Build up to 3–4 cardio sessions per week at a moderate, sustainable pace — start with 2 if currently sedentary`,
-        `Add one slightly higher-effort session weekly, with full recovery between efforts`,
-        `Check in with your personal trainer at the 90-day mark to reassess VO₂ max and adjust your training and nutrition plan`,
-      ]:[
-        `Maintain current cardio frequency and intensity — this is a maintenance dose, not a ramp-up`,
-        `Keep variety in your cardio routine to stay engaged and protect this gain long term`,
-        `Check in with your personal trainer at your next regular visit for nutrition and fitness advice to keep this on track`,
-      ])
-    },
-    'Visceral Fat':{
-      actions:(gap>0?[
-        `Reduce added sugar and refined carbohydrates in main meals`,
-        `Add regular daily movement, such as a short walk most days of the week`,
-        `Check in with your personal trainer at the 90-day mark for updated nutrition and fitness guidance based on your progress`,
-      ]:[
-        `Keep current eating habits consistent — this is about holding steady, not restricting further`,
-        `Continue regular daily movement as a maintenance habit`,
-        `Check in with your personal trainer at your next regular visit for nutrition and fitness advice to help maintain this`,
-      ])
-    },
-    'Lean Muscle':{
-      actions:(gap>0?[
-        `Add 2–3 resistance training sessions per week, focusing on major muscle groups`,
-        `Increase protein intake slightly and aim to include it at every meal`,
-        `Meet with your personal trainer every 90 days for nutrition and fitness advice to keep muscle gains on track`,
-      ]:[
-        `Maintain current resistance training frequency to preserve this gain`,
-        `Keep protein intake consistent at its current level`,
-        `Meet with your personal trainer at your next regular check-in for nutrition and fitness advice to help maintain this`,
-      ])
-    },
-    'Grip Strength':{
-      actions:(gap>0?[
-        `Add simple carrying and gripping exercises to each resistance session`,
-        `Use a grip strengthener for a few minutes daily, increasing resistance gradually`,
-        `Meet with your personal trainer at the 60-day mark for nutrition and fitness advice to keep this progress on track`,
-      ]:[
-        `Maintain current resistance training frequency — 2–3 sessions per week with compound pulling and carrying movements`,
-        `Add periodic carrying and gripping work as a maintenance dose, not a ramp-up — consistency matters more than progression here`,
-        `Meet with your personal trainer at your next regular check-in for nutrition and fitness advice to help maintain this`,
-      ])
-    }
-  };
-
-  const content=metricContent[oppKey];
-  document.getElementById('assess-list').innerHTML='';
-  document.getElementById('action-list').innerHTML='';
-
-  // Opening line — sets overall tone, distinct per band
-  addBullet('assess-list', openingMap[tone]);
-
-  // Generic, non-prescriptive standing for all four metrics (not workout-specific)
-  const genericStanding=(metric,g)=>{
-    const label = g>0.15 ? 'a clear opportunity area' : g>0 ? 'slightly below where we\'d like it' : 'at or above where we\'d like it';
-    return `${metric} is ${label} relative to the age-group average.`;
-  };
-  ['VO₂ Max','Lean Muscle','Visceral Fat','Grip Strength'].forEach(metric=>{
-    addBullet('assess-list', genericStanding(metric, gaps[metric]));
+  // Milestone dots: thresholds at 10, 25, 45, 62, 78 display%
+  const thresholds=[10,25,45,62,78];
+  thresholds.forEach((t,i)=>{
+    document.getElementById('ms-'+i)?.classList.toggle('reached',display>=t);
   });
-
-  // Name the priority metric last
-  addBullet('assess-list', `Of the four, ${oppKey} represents the biggest opportunity for improvement right now.`);
-
-  content.actions.forEach(t=>addBullet('action-list',t));
+  // Pick motivational message based on progress level
+  const msgIdx=display<15?0:display<30?1:display<50?2:display<65?3:4;
+  msgEl.textContent=PROGRESS_MESSAGES[msgIdx];
 }
 
-// ── CALCULATE ──
 function calcThrive(){
-  const name=document.getElementById('t-name').value.trim();
   const age=parseFloat(document.getElementById('t-age').value);
   const bw=parseFloat(document.getElementById('t-weight').value);
-  if(isNaN(age)||isNaN(bw)){toast('Please enter age and body weight first.');return;}
+  const vo2b=parseFloat(document.getElementById('t-vo2b').value);
+  const vo2a=parseFloat(document.getElementById('t-vo2a').value);
+  const lmmb=parseFloat(document.getElementById('t-lmmb').value);
+  const lmma=parseFloat(document.getElementById('t-lmma').value);
+  const vfb=parseFloat(document.getElementById('t-vfb').value);
+  const vfa=parseFloat(document.getElementById('t-vfa').value);
+  const gsb=parseFloat(document.getElementById('t-gsb').value);
+  const gsa=parseFloat(document.getElementById('t-gsa').value);
+  if([age,bw,vo2b,vo2a,lmmb,lmma,vfb,vfa,gsb,gsa].some(isNaN)){showToast('Please fill in all fields first.');return;}
 
-  // Age-based population averages for blank fields (NHANES normative data)
-  const AVG_VO2 = age<30?13.5 : age<40?12.5 : age<50?11.5 : age<60?10.5 : 9.5;
-  const AVG_MUSCLE = (age<40?0.67 : age<50?0.65 : age<60?0.63 : 0.60) * bw;
-  const AVG_FAT    = (age<40?0.050 : age<50?0.055 : age<60?0.060 : 0.065) * bw;
-  const AVG_GRIP   = age<40?95 : age<50?88 : age<60?80 : age<70?72 : 64;
-
-  // Read each field — if blank use population average
-  const rvo2b=parseFloat(document.getElementById('t-vo2b').value);
-  const rvo2a=parseFloat(document.getElementById('t-vo2a').value);
-  const rlmmb=parseFloat(document.getElementById('t-lmmb').value);
-  const rlmma=parseFloat(document.getElementById('t-lmma').value);
-  const rvfb =parseFloat(document.getElementById('t-vfb').value);
-  const rvfa =parseFloat(document.getElementById('t-vfa').value);
-  const rgsb =parseFloat(document.getElementById('t-gsb').value);
-  const rgsa =parseFloat(document.getElementById('t-gsa').value);
-
-  // Fallback logic per metric:
-  // Both filled → use both (actual before/after improvement)
-  // Only "after" filled → before = population average (compares current vs population)
-  // Only "before" filled → after = same as before (no change, neutral)
-  // Both blank → both = population average (zero contribution)
-  const vo2b = isNaN(rvo2b) ? AVG_VO2    : rvo2b;
-  const vo2a = isNaN(rvo2a) ? (isNaN(rvo2b) ? AVG_VO2    : rvo2b) : rvo2a;
-  const lmmb = isNaN(rlmmb) ? AVG_MUSCLE : rlmmb;
-  const lmma = isNaN(rlmma) ? (isNaN(rlmmb) ? AVG_MUSCLE : rlmmb) : rlmma;
-  const vfb  = isNaN(rvfb)  ? AVG_FAT    : rvfb;
-  const vfa  = isNaN(rvfa)  ? (isNaN(rvfb)  ? AVG_FAT    : rvfb)  : rvfa;
-  const gsb  = isNaN(rgsb)  ? AVG_GRIP   : rgsb;
-  const gsa  = isNaN(rgsa)  ? (isNaN(rgsb)  ? AVG_GRIP   : rgsb)  : rgsa;
-
-  // Track which fields used defaults
-  const usedDefaults=[];
-  if(isNaN(rvo2b)&&isNaN(rvo2a)) usedDefaults.push('VO₂ Max');
-  if(isNaN(rlmmb)&&isNaN(rlmma)) usedDefaults.push('Lean Muscle');
-  if(isNaN(rvfb) &&isNaN(rvfa))  usedDefaults.push('Visceral Fat');
-  if(isNaN(rgsb) &&isNaN(rgsa))  usedDefaults.push('Grip Strength');
-
-  // SSA Period Life Table 2021 (male+female average)
-  const BL={18:0.0089,20:0.0094,25:0.0111,30:0.0157,35:0.0237,40:0.0361,45:0.0548,50:0.0821,55:0.1211,60:0.1769,65:0.2563,70:0.3647};
-  const getBL=a=>{const k=Object.keys(BL).map(Number);return BL[k.reduce((p,c)=>Math.abs(c-a)<Math.abs(p-a)?c:p)];};
-
-  // VO2 in mL/lb/min → β = -0.088 (= ln(0.87)/3.5 / 0.4536)
-  // Muscle/Fat as % of body weight → -0.015 and +0.012 (base, before age scaling)
-  // Grip in lbs → -0.014 (= ln(0.97)/2.2046)
-  // Age-based visceral fat risk multiplier: 1x under 40, 1.5x for 40-49, 2x for 50+
-  const vfAgeMultiplier = age>=50 ? 2 : age>=40 ? 1.5 : 1;
-  const risk=(vo2,m,f,g)=>Math.exp(-0.088*vo2+(-0.015*(100/bw))*m+(0.014*vfAgeMultiplier*(100/bw))*f+(-0.014)*g);
-
-  const r2age=r=>{
-    const ages=Object.keys(BL).map(Number).sort((a,b)=>a-b);
-    if(r<=BL[ages[0]])return ages[0];
-    if(r>=BL[ages[ages.length-1]])return ages[ages.length-1];
+  // Source: SSA Period Life Table 2021 (male+female average), ssa.gov/oact/STATS/table4c6.html
+  const BASELINE={18:0.0089,20:0.0094,25:0.0111,30:0.0157,35:0.0237,40:0.0361,45:0.0548,50:0.0821,55:0.1211,60:0.1769,65:0.2563,70:0.3647};
+  function getBaseline(a){const keys=Object.keys(BASELINE).map(Number);return BASELINE[keys.reduce((p,c)=>Math.abs(c-a)<Math.abs(p-a)?c:p)];}
+  function computeRisk(vo2,muscle,fat,grip){return Math.exp(-0.040*vo2+(-0.015*(100/bw))*muscle+(0.008*(100/bw))*fat+(-0.014)*grip);}
+  function riskToAge(r){
+    const ages=Object.keys(BASELINE).map(Number).sort((a,b)=>a-b);
+    if(r<=BASELINE[ages[0]])return ages[0];
+    if(r>=BASELINE[ages[ages.length-1]])return ages[ages.length-1];
     for(let i=0;i<ages.length-1;i++){
-      const a1=ages[i],r1=BL[a1],a2=ages[i+1],r2=BL[a2];
-      if(r>=r1&&r<=r2){return a1+(Math.log(r)-Math.log(r1))/(Math.log(r2)-Math.log(r1))*(a2-a1);}
+      const a1=ages[i],r1=BASELINE[a1],a2=ages[i+1],r2=BASELINE[a2];
+      if(r>=r1&&r<=r2){const t=(Math.log(r)-Math.log(r1))/(Math.log(r2)-Math.log(r1));return a1+t*(a2-a1);}
     }
     return ages[ages.length-1];
-  };
+  }
 
-  const rB=risk(vo2b,lmmb,vfb,gsb);
-  const rA=risk(vo2a,lmma,vfa,gsa);
-  const ratio=rA/rB;
-  const pct=(1-ratio)*100;
-  const popRisk=getBL(age);
-  const adjAfter=popRisk*ratio;
-  const ageB=r2age(popRisk);
-  const ageA=r2age(adjAfter);
-  const ty=ageB-ageA; // signed: positive = improvement, negative = decline
+  const relBefore=computeRisk(vo2b,lmmb,vfb,gsb);
+  const relAfter=computeRisk(vo2a,lmma,vfa,gsa);
+  const relRatio=relAfter/relBefore;
+  const pctImprove=(1-relRatio)*100;
+  const popRisk=getBaseline(age);
+  const adjBefore=popRisk;
+  const adjAfter=popRisk*relRatio;
+  const riskAgeBefore=riskToAge(adjBefore);
+  const riskAgeAfter=riskToAge(adjAfter);
+  const thriveYears=Math.max(0,riskAgeBefore-riskAgeAfter);
 
-  // Biggest contributor when improved / biggest risk factor when worsened
-  const contribs={
-    'VO₂ Max':      (1-risk(vo2a,lmmb,vfb,gsb)/rB)*100,
-    'Lean Muscle':  (1-risk(vo2b,lmma,vfb,gsb)/rB)*100,
-    'Visceral Fat': (1-risk(vo2b,lmmb,vfa,gsb)/rB)*100,
-    'Grip Strength':(1-risk(vo2b,lmmb,vfb,gsa)/rB)*100,
-  };
-  const improved = pct > 0;
-  // If improved: find metric with biggest positive contribution
-  // If worsened: find metric with biggest negative contribution (most harmful)
-  const bigKey = improved
-    ? Object.keys(contribs).reduce((a,b)=>contribs[a]>contribs[b]?a:b)
-    : Object.keys(contribs).reduce((a,b)=>contribs[a]<contribs[b]?a:b);
-  const bigPct = contribs[bigKey];
-
-  // Update results
-  document.getElementById('th-num').textContent=ty.toFixed(1);
+  document.getElementById('th-num').textContent=thriveYears.toFixed(1);
   document.getElementById('th-unit').textContent=' yrs';
-  document.getElementById('th-sub').textContent=`Risk profile shifted from a ${Math.round(ageB)}-yr-old's to a ${Math.round(ageA)}-yr-old's`;
+  document.getElementById('th-sub').textContent=`Your mortality risk moved from a ${Math.round(riskAgeBefore)}-yr-old's to roughly a ${Math.round(riskAgeAfter)}-yr-old's`;
   document.getElementById('r-popavg').textContent=(popRisk*100).toFixed(2)+'%';
-  document.getElementById('r-before').textContent=(popRisk*100).toFixed(2)+'%';
+  document.getElementById('r-before').textContent=(adjBefore*100).toFixed(2)+'%';
   document.getElementById('r-after').textContent=(adjAfter*100).toFixed(2)+'%';
-  document.getElementById('r-ratio').textContent=ratio.toFixed(3);
-  document.getElementById('r-improve').textContent=(improved?'↓ ':'↑ ')+Math.abs(pct).toFixed(1)+'%';
-  document.getElementById('r-bann').textContent=improved
-    ? `✦ 10-yr death risk dropped from ${(popRisk*100).toFixed(2)}% → ${(adjAfter*100).toFixed(2)}% — equivalent to a ${Math.round(ageA)}-year-old's risk`
-    : `⚠ 10-yr death risk increased from ${(popRisk*100).toFixed(2)}% → ${(adjAfter*100).toFixed(2)}% — equivalent to a ${Math.round(ageA)}-year-old's risk`;
-  // Remove any previous default note, then add fresh one if needed
-  const oldNote=document.getElementById('defaults-note');
-  if(oldNote) oldNote.remove();
-  if(usedDefaults.length>0){
-    const note=document.createElement('div');
-    note.id='defaults-note';
-    note.style.cssText='margin-top:8px;font-size:11px;color:var(--muted);text-align:center;font-style:italic';
-    note.textContent=`Population averages used for: ${usedDefaults.join(', ')}`;
-    document.getElementById('r-bann').after(note);
-  }
-
-  // Personalization — different wording for improved vs worsened
-  const greet=name?name+',':'Your results:';
-  document.getElementById('per-eye').textContent=(name?name.toUpperCase()+' · ':'')+'YOUR RESULTS';
-  if(improved){
-    document.getElementById('per-msg').innerHTML=`${greet}<br>Your improvements reduced your estimated mortality risk by <strong>${Math.abs(pct).toFixed(0)}%</strong>. The strongest contributor was your <strong>${bigKey}</strong> improvement. At your current pace, your fitness profile resembles someone approximately <strong>${ty.toFixed(1)} years younger</strong>.`;
-    document.getElementById('per-contrib').innerHTML=`Biggest contributor: <span>${bigKey}</span> (↓${Math.abs(bigPct).toFixed(1)}% risk) &nbsp;·&nbsp; Risk ratio: <span>${ratio.toFixed(3)}</span>`;
-  } else {
-    document.getElementById('per-msg').innerHTML=`${greet}<br>Your current metrics increased your estimated mortality risk by <strong>${Math.abs(pct).toFixed(0)}%</strong>. The largest contributing factor was <strong>${bigKey}</strong>. Addressing this metric is the most direct path to improving your longevity profile.`;
-    document.getElementById('per-contrib').innerHTML=`Largest risk factor: <span>${bigKey}</span> (↑${Math.abs(bigPct).toFixed(1)}% risk) &nbsp;·&nbsp; Risk ratio: <span>${ratio.toFixed(3)}</span>`;
-  }
-  document.getElementById('personal').classList.add('show');
-
-  // Opportunity + print
-  populateOpp(ty,
-    {vo2:vo2a, muscle:lmma, fat:vfa, grip:gsa},
-    {vo2:AVG_VO2, muscle:AVG_MUSCLE, fat:AVG_FAT, grip:AVG_GRIP}
-  );
-  document.getElementById('opp-card').classList.add('show');
-  document.getElementById('print-btn').classList.add('show');
-
-  // Set print date
-  document.getElementById('print-date').textContent=new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-
-  toast('✓ Thrive Years calculated!');
-  updateProgress(pct);
+  document.getElementById('r-ratio').textContent=relRatio.toFixed(3);
+  document.getElementById('r-improve').textContent='↓ '+pctImprove.toFixed(1)+'%';
+  document.getElementById('r-bann').textContent=`✦ 10-yr death risk dropped from ${(adjBefore*100).toFixed(2)}% → ${(adjAfter*100).toFixed(2)}% — equivalent to a ${Math.round(riskAgeAfter)}-year-old's risk`;
+  showToast('✓ Thrive Years calculated!');
+  updateProgressBar(pctImprove);
 }
 
-// ── PRINT (uses iframe — avoids popup blockers) ──
-function doPrint(){
-  const name=document.getElementById('t-name').value.trim()||'Client';
-  const perMsg=document.getElementById('per-msg').innerHTML;
-  const thNum=document.getElementById('th-num').textContent;
-  const thUnit=document.getElementById('th-unit').textContent;
-  const thSub=document.getElementById('th-sub').textContent;
-  const rPA=document.getElementById('r-popavg').textContent;
-  const rB=document.getElementById('r-before').textContent;
-  const rA=document.getElementById('r-after').textContent;
-  const rR=document.getElementById('r-ratio').textContent;
-  const rI=document.getElementById('r-improve').textContent;
-  const rBann=document.getElementById('r-bann').textContent;
-  const assess=[...document.querySelectorAll('#assess-list .btxt')].map(e=>e.value.trim()).filter(Boolean);
-  const actions=[...document.querySelectorAll('#action-list .btxt')].map(e=>e.value.trim()).filter(Boolean);
-  const today=new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-
-  const css=`
-    *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-    body{font-family:'DM Sans',Helvetica,sans-serif;color:#1a2e3a;padding:32px 40px;font-size:12px}
-    .hdr{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:2px solid #e2e8ed;margin-bottom:18px}
-    .logo{display:flex;align-items:center;gap:8px}
-    .lb{width:30px;height:30px;background:#2ab5a5;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10px;color:#fff}
-    .ln{font-size:14px}.ln b{color:#2ab5a5}
-    .dt{font-size:10px;color:#8a9baa}
-    .personal{background:#1a2e3a;border-radius:10px;padding:16px 20px;margin-bottom:14px}
-    .pe{font-size:9px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}
-    .pm{font-family:Georgia,serif;font-size:15px;color:#fff;line-height:1.55;font-style:italic}
-    .pm b{color:#2ab5a5;font-style:normal}
-    .hero{background:#e8f7f5;border:1px solid #c5ebe7;border-radius:10px;padding:16px;text-align:center;margin-bottom:14px}
-    .he{font-size:9px;font-weight:700;color:#2ab5a5;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
-    .hn{font-family:Georgia,serif;font-size:52px;font-weight:700;color:#2ab5a5;line-height:1}
-    .hu{font-size:16px;color:#2ab5a5;opacity:.7;margin-left:3px}
-    .hs{font-size:11px;color:#5a8090;margin-top:5px}
-    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-    .sec{background:#f4f6f7;border-radius:9px;padding:12px 14px}
-    .st{font-size:9px;font-weight:700;color:#2ab5a5;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px}
-    .sr{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e2e8ed;font-size:11px}
-    .sr:last-child{border-bottom:none}
-    .sl{color:#8a9baa}.sv{font-weight:600}
-    .bann{background:#e8f7f5;border:1px solid #c5ebe7;border-radius:8px;padding:9px 12px;font-size:11px;color:#2ab5a5;font-weight:500;text-align:center;margin-bottom:14px}
-    .osub{font-size:9px;font-weight:600;color:#8a9baa;letter-spacing:.08em;text-transform:uppercase;margin:10px 0 7px}
-    .osub:first-of-type{margin-top:0}
-    .bl{display:flex;gap:7px;margin-bottom:5px;font-size:11px;line-height:1.5}
-    .bd{width:5px;height:5px;border-radius:50%;background:#2ab5a5;flex-shrink:0;margin-top:4px}
-    .foot{margin-top:20px;padding-top:10px;border-top:1px solid #e2e8ed;font-size:9px;color:#8a9baa;display:flex;justify-content:space-between}
-  `;
-
-  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>${css}</style></head><body>
-  <div class="hdr">
-    <div class="logo"><div class="lb">BLU</div><span class="ln">by <b>ThriveWell</b> &nbsp;·&nbsp; ThriveYears Report</span></div>
-    <span class="dt">${today}</span>
-  </div>
-  <div class="personal">
-    <div class="pe">${name.toUpperCase()} · YOUR RESULTS</div>
-    <div class="pm">${perMsg}</div>
-  </div>
-  <div class="hero">
-    <div class="he">Estimated ThriveYears Impacted</div>
-    <div><span class="hn">${thNum}</span><span class="hu">${thUnit}</span></div>
-    <div class="hs">${thSub}</div>
-  </div>
-  <div class="cols">
-    <div class="sec">
-      <div class="st">Risk Summary</div>
-      <div class="sr"><span class="sl">Avg 10-yr Mortality Risk</span><span class="sv">${rPA}</span></div>
-      <div class="sr"><span class="sl">Your Risk Before</span><span class="sv">${rB}</span></div>
-      <div class="sr"><span class="sl">Your Risk After</span><span class="sv">${rA}</span></div>
-      <div class="sr"><span class="sl">Relative Risk Ratio</span><span class="sv">${rR}</span></div>
-      <div class="sr"><span class="sl">Risk Improvement</span><span class="sv">${rI}</span></div>
-    </div>
-    <div class="sec">
-      <div class="st">Biggest Opportunity</div>
-      <div class="osub">Coach's Assessment</div>
-      ${assess.map(t=>`<div class="bl"><div class="bd"></div><span>${t}</span></div>`).join('')}
-    </div>
-  </div>
-  <div class="bann">${rBann}</div>
-  <div class="sec" style="margin-bottom:14px">
-    <div class="st">Actions to Get There</div>
-    <div style="margin-top:8px">
-    ${actions.map(t=>`<div class="bl"><div class="bd"></div><span>${t}</span></div>`).join('')}
-    </div>
-  </div>
-  <div class="foot">
-    <span>BLU by ThriveWell · Longevity Nutrition · Fort Lauderdale</span>
-    <span>Based on published mortality research · SSA Period Life Table 2021</span>
-  </div>
-  <script>window.onload=function(){window.print();}<\/script>
-  </body></html>`;
-
-  // Use hidden iframe — most reliable, no popup blocker issues
-  let fr=document.getElementById('_pf');
-  if(!fr){fr=document.createElement('iframe');fr.id='_pf';fr.style.cssText='position:fixed;top:-9999px;left:-9999px;width:0;height:0;border:0';document.body.appendChild(fr);}
-  fr.srcdoc=html;
+const INFO={
+  popavg:{title:'Avg 10-yr Death Risk',body:'Out of 100 people your age, this is roughly how many are expected to die in the next 10 years. It\'s the average for your age group — your personal risk may be higher or lower.'},
+  before:{title:'Your Risk Before',body:'Based on your fitness metrics before any changes, this is your estimated chance of dying in the next 10 years — compared to the average for your age.'},
+  after:{title:'Your Risk After',body:'With your improved fitness metrics, this is your new estimated 10-year risk. The lower this number, the better!'},
+  ratio:{title:'Relative Risk Ratio',body:'This compares your risk after vs. before. A number below 1.0 means your risk went down. For example, 0.75 means your risk is now 25% lower than it was.'},
+  improve:{title:'Overall Risk Improvement',body:'The total percentage drop in your personal mortality risk. A 20% improvement means you\'re meaningfully less likely to die in the next 10 years than before your fitness changes.'}
+};
+function showInfo(key,e){
+  e.stopPropagation();
+  const popup=document.getElementById('info-popup');
+  const btn=e.currentTarget;
+  document.getElementById('info-title').textContent=INFO[key].title;
+  document.getElementById('info-body').textContent=INFO[key].body;
+  const rect=btn.getBoundingClientRect();
+  const parent=popup.parentElement.getBoundingClientRect();
+  popup.style.display='block';
+  popup.style.top=(rect.bottom-parent.top+8)+'px';
+  const left=rect.left-parent.left;
+  popup.style.left=Math.min(Math.max(left,0),parent.width-250)+'px';
 }
-
-// ── TABS ──
-function switchTab(tab){
-  document.getElementById('tab-calc').classList.toggle('active', tab==='calc');
-  document.getElementById('tab-feedback').classList.toggle('active', tab==='feedback');
-  document.querySelector('.page > .prog-wrap').style.display = tab==='calc'?'':'none';
-  document.querySelector('.thrive-intro').style.display = tab==='calc'?'':'none';
-  document.querySelector('.layout').style.display = tab==='calc'?'grid':'none';
-  document.getElementById('feedback-page').style.display = tab==='feedback'?'block':'none';
-}
-
-// ── FEEDBACK ──
-async function submitFeedback(){
-  const name=document.getElementById('fb-name').value.trim();
-  const message=document.getElementById('fb-message').value.trim();
-  const successEl=document.getElementById('fb-success');
-  const errorEl=document.getElementById('fb-error');
-  successEl.style.display='none';
-  errorEl.style.display='none';
-  if(!name||!message){errorEl.textContent='Please enter your name and feedback.';errorEl.style.display='block';return;}
-  try{
-    const res=await fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,message})});
-    const data=await res.json();
-    if(data.success){
-      successEl.style.display='block';
-      document.getElementById('fb-name').value='';
-      document.getElementById('fb-message').value='';
-    } else {
-      errorEl.textContent=data.error||'Something went wrong.';
-      errorEl.style.display='block';
-    }
-  }catch(e){
-    errorEl.textContent='Could not connect. Please try again.';
-    errorEl.style.display='block';
-  }
-}
-
-function checkPassword(){
-  const pw=document.getElementById('admin-pw').value;
-  document.getElementById('pw-error').style.display='none';
-  if(pw==='thriveyears'){
-    document.getElementById('admin-locked').style.display='none';
-    document.getElementById('admin-unlocked').style.display='block';
-    loadAllFeedback();
-  } else {
-    document.getElementById('pw-error').style.display='block';
-  }
-}
-
-async function loadAllFeedback(){
-  const listEl=document.getElementById('fb-list');
-  const countEl=document.getElementById('fb-count');
-  listEl.innerHTML='<div style="font-size:13px;color:var(--muted);font-style:italic">Loading...</div>';
-  try{
-    const res=await fetch('/api/feedback?password=thriveyears');
-    const data=await res.json();
-    if(!Array.isArray(data)){listEl.innerHTML='<div style="font-size:13px;color:#dc2626">Error loading feedback.</div>';return;}
-    countEl.textContent=`${data.length} submission${data.length!==1?'s':''}`;
-    if(data.length===0){listEl.innerHTML='<div style="font-size:13px;color:var(--muted);font-style:italic;text-align:center;padding:20px 0">No feedback submitted yet.</div>';return;}
-    listEl.innerHTML=data.slice().reverse().map(f=>`
-      <div style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 16px" id="fb-${f.id}">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <span style="font-size:13px;font-weight:600;color:var(--navy)">${f.name}</span>
-          <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-size:11px;color:var(--muted)">${new Date(f.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</span>
-            <button onclick="deleteFeedback(${f.id})" style="background:none;border:1px solid #fecaca;border-radius:7px;padding:3px 8px;font-size:11px;color:#dc2626;cursor:pointer;font-family:inherit;transition:background .15s" onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background='none'">Delete</button>
-          </div>
-        </div>
-        <p style="font-size:13px;color:var(--navy);line-height:1.6;margin:0">${f.message}</p>
-      </div>
-    `).join('');
-  }catch(e){
-    listEl.innerHTML='<div style="font-size:13px;color:#dc2626">Could not load feedback.</div>';
-  }
-}
-
-async function deleteFeedback(id){
-  if(!confirm('Delete this feedback?')) return;
-  try{
-    const res=await fetch(`/api/feedback/${id}?password=thriveyears`,{method:'DELETE'});
-    const data=await res.json();
-    if(data.success){
-      document.getElementById(`fb-${id}`)?.remove();
-      const listEl=document.getElementById('fb-list');
-      const remaining=listEl.querySelectorAll('[id^="fb-"]').length;
-      document.getElementById('fb-count').textContent=`${remaining} submission${remaining!==1?'s':''}`;
-      if(remaining===0) listEl.innerHTML='<div style="font-size:13px;color:var(--muted);font-style:italic;text-align:center;padding:20px 0">No feedback submitted yet.</div>';
-    }
-  }catch(e){
-    alert('Could not delete. Please try again.');
-  }
-}
+document.addEventListener('click',function(){
+  const popup=document.getElementById('info-popup');
+  if(popup)popup.style.display='none';
+});
 </script>
 </body>
 </html>
